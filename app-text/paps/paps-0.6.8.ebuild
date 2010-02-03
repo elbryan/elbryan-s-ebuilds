@@ -20,8 +20,8 @@ DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
 src_prepare() {
-	epatch "${FILESDIR}/0001-Fixed-Pangoft2-check-now-using-pkg-modules.patch"
-	epatch "${FILESDIR}/0002-Updated-acinclude-with-up-to-date-macros.patch"
+	epatch "${FILESDIR}/0001-Fixed-pango-ft2-check-and-fixed-Makefile.am.patch"
+	epatch "${FILESDIR}/0002-Fixed-acinclude.m4.patch"
 	eautoreconf
 }
 

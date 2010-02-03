@@ -1,0 +1,63 @@
+From 640d67a1e5aa9cf5da4506579ebbb9da07505eda Mon Sep 17 00:00:00 2001
+From: Fabiano Francesconi <fabiano.francesconi@gmail.com>
+Date: Wed, 3 Feb 2010 18:27:30 +0100
+Subject: [PATCH 1/2] Fixed pango-ft2 check and fixed Makefile.am
+
+---
+ configure.in    |    7 +++++++
+ src/Makefile.am |   11 ++++-------
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index c9b3ae0..6730123 100644
+--- a/configure.in
++++ b/configure.in
+@@ -7,6 +7,13 @@ AC_LANG_C
+ AC_PROG_CC
+ AM_PROG_LIBTOOL
+ 
++PANGOFT2_REQUIRED=1.26.0
++AC_SUBST(PANGOFT2_REQUIRED)
++
++PKG_CHECK_MODULES(pangoft2, pangoft2 >= $PANGOFT2_REQUIRED)
++AC_SUBST(pangoft2_CFLAGS)
++AC_SUBST(pangoft2_LIBS)
++
+ DX_HTML_FEATURE(ON)
+ DX_CHM_FEATURE(OFF)
+ DX_CHI_FEATURE(OFF)
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 8f4bf0d..3848e1d 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -5,23 +5,20 @@ libpaps_a_inc_HEADERS = libpaps.h
+ libpaps_a_incdir = $(includedir)
+ 
+ bin_PROGRAMS = paps
+-paps_CFLAGS  = -Wall 
++paps_CFLAGS  = -Wall $(pangoft2_CFLAGS) 
+ paps_SOURCES = paps.c
+-paps_LDADD = $(lib_LIBRARIES) $(all_libraries)
+-paps_LDFLAGS = `pkg-config --libs pangoft2`
++paps_LDADD = $(lib_LIBRARIES) $(all_libraries) $(pangoft2_LIBS)
+ paps_DEPENDENCIES = $(lib_LIBRARIES)
+ 
+ EXTRA_DIST = test_libpaps.c paps.1
+ 
+ # set the include path found by configure
+-INCLUDES= $(all_includes) `pkg-config --cflags pangoft2`
++INCLUDES= $(all_includes) $(pangoft2_CFLAGS)
+ 
+ # Test program
+ noinst_PROGRAMS = test_libpaps
+ 
+ 
+ test_libpaps_SOURCES = test_libpaps.c
+-test_libpaps_LDADD = $(lib_LIBRARIES) $(all_libraries)
+-test_libpaps_LDFLAGS = `pkg-config --libs pangoft2`
++test_libpaps_LDADD = $(lib_LIBRARIES) $(all_libraries) $(pangoft2_LIBS)
+ test_libpaps_DEPENDENCIES = $(lib_LIBRARIES) 
+-
+-- 
+1.6.4.4
+

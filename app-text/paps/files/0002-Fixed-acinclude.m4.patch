@@ -1,0 +1,75 @@
+From f7636b6b15ca0d64c47507bc60654845f6ef19b5 Mon Sep 17 00:00:00 2001
+From: Fabiano Francesconi <fabiano.francesconi@gmail.com>
+Date: Wed, 3 Feb 2010 18:28:42 +0100
+Subject: [PATCH 2/2] Fixed acinclude.m4
+
+---
+ acinclude.m4 |   41 +++--------------------------------------
+ 1 files changed, 3 insertions(+), 38 deletions(-)
+
+diff --git a/acinclude.m4 b/acinclude.m4
+index e4688de..33f20a5 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -1,39 +1,4 @@
+-# This file is part of Autoconf.                       -*- Autoconf -*-
+-
+-# Copyright (C) 2004 Oren Ben-Kiki
+-# This file is distributed under the same terms as the Autoconf macro files.
+-
+-# Generate automatic documentation using Doxygen. Works in concert with the
+-# aminclude.m4 file and a compatible doxygen configuration file. Defines the
+-# following public macros:
+-#
+-# DX_???_FEATURE(ON|OFF) - control the default setting fo a Doxygen feature.
+-# Supported features are 'DOXYGEN' itself, 'DOT' for generating graphics,
+-# 'HTML' for plain HTML, 'CHM' for compressed HTML help (for MS users), 'CHI'
+-# for generating a seperate .chi file by the .chm file, and 'MAN', 'RTF',
+-# 'XML', 'PDF' and 'PS' for the appropriate output formats. The environment
+-# variable DOXYGEN_PAPER_SIZE may be specified to override the default 'a4wide'
+-# paper size.
+-#
+-# By default, HTML, PDF and PS documentation is generated as this seems to be
+-# the most popular and portable combination. MAN pages created by Doxygen are
+-# usually problematic, though by picking an appropriate subset and doing some
+-# massaging they might be better than nothing. CHM and RTF are specific for MS
+-# (note that you can't generate both HTML and CHM at the same time). The XML is
+-# rather useless unless you apply specialized post-processing to it.
+-#
+-# The macro mainly controls the default state of the feature. The use can
+-# override the default by specifying --enable or --disable. The macros ensure
+-# that contradictory flags are not given (e.g., --enable-doxygen-html and
+-# --enable-doxygen-chm, --enable-doxygen-anything with --disable-doxygen, etc.)
+-# Finally, each feature will be automatically disabled (with a warning) if the
+-# required programs are missing.
+-#
+-# Once all the feature defaults have been specified, call DX_INIT_DOXYGEN with
+-# the following parameters: a one-word name for the project for use as a
+-# filename base etc., an optional configuration file name (the default is
+-# 'Doxyfile', the same as Doxygen's default), and an optional output directory
+-# name (the default is 'doxygen-doc').
++#serial 9
+ 
+ ## ----------##
+ ## Defaults. ##
+@@ -78,7 +43,7 @@ AC_DEFUN([DX_REQUIRE_PROG], [
+ AC_PATH_TOOL([$1], [$2])
+ if test "$DX_FLAG_[]DX_CURRENT_FEATURE$$1" = 1; then
+     AC_MSG_WARN([$2 not found - will not DX_CURRENT_DESCRIPTION])
+-    AC_SUBST([DX_FLAG_[]DX_CURRENT_FEATURE], 0)
++    AC_SUBST(DX_FLAG_[]DX_CURRENT_FEATURE, 0)
+ fi
+ ])
+ 
+@@ -101,7 +66,7 @@ test "$DX_FLAG_$1" = "$2" \
+ # ----------------------------------------------------------
+ # Turn off the DX_CURRENT_FEATURE if the required feature is off.
+ AC_DEFUN([DX_CLEAR_DEPEND], [
+-test "$DX_FLAG_$1" = "$2" || AC_SUBST([DX_FLAG_[]DX_CURRENT_FEATURE], 0)
++test "$DX_FLAG_$1" = "$2" || AC_SUBST(DX_FLAG_[]DX_CURRENT_FEATURE, 0)
+ ])
+ 
+ # DX_FEATURE_ARG(FEATURE, DESCRIPTION,
+-- 
+1.6.4.4
+
