@@ -1,4 +1,4 @@
-From f7636b6b15ca0d64c47507bc60654845f6ef19b5 Mon Sep 17 00:00:00 2001
+From 69c667e3bab1c6d9d14b1e93b4b7c3fecd976a32 Mon Sep 17 00:00:00 2001
 From: Fabiano Francesconi <fabiano.francesconi@gmail.com>
 Date: Wed, 3 Feb 2010 18:28:42 +0100
 Subject: [PATCH 2/2] Fixed acinclude.m4
