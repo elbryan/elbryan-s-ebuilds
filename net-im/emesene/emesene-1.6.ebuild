@@ -36,11 +36,12 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/$(get_libdir)/${PN}
+	rm -r build || die "rm build failed"
+	insinto $(python_get_sitedir)/${PN}
 	doins -r * || die "doins failed"
 
-	fperms a+x /usr/$(get_libdir)/${PN}/${PN} || die "fperms failed"
-	dosym /usr/$(get_libdir)/${PN}/${PN} /usr/bin/${PN} || die "dosym failed"
+	fperms a+x $(python_get_sitedir)/${PN}/${PN} || die "fperms failed"
+	dosym $(python_get_sitedir)/${PN}/${PN} /usr/bin/${PN} || die "dosym failed"
 
 	doman misc/${PN}.1 || die "doman failed"
 
@@ -51,7 +52,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize /usr/$(get_libdir)/${PN}
+	python_mod_optimize $(python_get_sitedir)/${PN}
 
 	einfo
 	einfo "If you want to use the spell-checking feature, you should emerge"
@@ -59,5 +60,5 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	python_mod_cleanup /usr/$(get_libdir)/${PN}
+	python_mod_cleanup $(python_get_sitedir)/${PN}
 }
