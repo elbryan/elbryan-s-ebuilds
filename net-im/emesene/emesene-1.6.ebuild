@@ -4,7 +4,9 @@
 
 EAPI="2"
 
-inherit distutils
+PYTHON_DEPEND="2"
+
+inherit eutils python
 
 DESCRIPTION="Platform independent MSN Messenger client written in Python+GTK"
 HOMEPAGE="http://www.emesene.org"
@@ -20,16 +22,16 @@ RDEPEND="x11-libs/gtk+:2
 	dev-python/pygtk:2"
 
 src_prepare() {
-	rm -f GPL PSF LGPL || die "rm failed"
+	rm GPL PSF LGPL || die "rm license files failed"
 
 	if ! use libmimic; then
-		rm -rf libmimic || die "rm libmimic failed"
+		rm -r libmimic || die "rm libmimic dir failed"
 	fi
 }
 
 src_compile() {
 	if use libmimic ; then
-		${python} ./setup.py build_ext -i || die "libmimic compile failed"
+		$(PYTHON -A) ./setup.py build_ext -i || die "libmimic compile failed"
 	fi
 }
 
