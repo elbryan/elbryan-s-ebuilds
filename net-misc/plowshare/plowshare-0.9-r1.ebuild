@@ -18,7 +18,7 @@ RDEPEND="
 	view-captcha? ( media-gfx/aview )
 	app-shells/bash
 	app-text/recode
-	>=app-text/tesseract-2.04[linguas_en]
+	>=app-text/tesseract-2.04
 	media-gfx/imagemagick[tiff,perl]
 	net-misc/curl
 	sys-apps/util-linux"
