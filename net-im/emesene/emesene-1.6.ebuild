@@ -20,7 +20,7 @@ IUSE="libmimic"
 DEPEND=""
 RDEPEND="x11-libs/gtk+:2
 	dev-python/pygtk:2
-	libmimic? ( dev-python/gst-python )"
+	dev-python/gst-python"
 
 src_prepare() {
 	rm GPL PSF LGPL || die "rm license files failed"
@@ -41,11 +41,11 @@ src_install() {
 		rm -r build || die "rm build failed"
 	fi
 
-	insinto $(python_get_sitedir)/${PN}
+	insinto /usr/share/${PN}
 	doins -r * || die "doins failed"
 
-	fperms a+x $(python_get_sitedir)/${PN}/${PN} || die "fperms failed"
-	dosym $(python_get_sitedir)/${PN}/${PN} /usr/bin/${PN} || die "dosym failed"
+	fperms a+x /usr/share/${PN}/${PN} || die "fperms failed"
+	dosym /usr/share/${PN}/${PN} /usr/bin/${PN} || die "dosym failed"
 
 	doman misc/${PN}.1 || die "doman failed"
 
@@ -56,7 +56,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize $(python_get_sitedir)/${PN}
+	python_mod_optimize /usr/share/${PN}
 
 	einfo
 	einfo "If you want to use the spell-checking feature, you should emerge"
@@ -64,5 +64,5 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	python_mod_cleanup $(python_get_sitedir)/${PN}
+	python_mod_cleanup /usr/share/${PN}
 }
