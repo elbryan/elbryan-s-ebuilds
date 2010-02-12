@@ -19,7 +19,8 @@ IUSE="libmimic"
 
 DEPEND=""
 RDEPEND="x11-libs/gtk+:2
-	dev-python/pygtk:2"
+	dev-python/pygtk:2
+	libmimic? ( dev-python/gst-python )"
 
 src_prepare() {
 	rm GPL PSF LGPL || die "rm license files failed"
@@ -36,7 +37,10 @@ src_compile() {
 }
 
 src_install() {
-	rm -r build || die "rm build failed"
+	if use libmimic; then
+		rm -r build || die "rm build failed"
+	fi
+
 	insinto $(python_get_sitedir)/${PN}
 	doins -r * || die "doins failed"
 
