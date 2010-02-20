@@ -3,6 +3,6 @@
 <pkgmetadata>
 <herd>maintainer-wanted</herd>
 	<use>
-		<flag name='libmimic'>Enable support for webcam</flag>
+		<flag name='webcam'>Enable support for webcam</flag>
 	</use>
 </pkgmetadata>

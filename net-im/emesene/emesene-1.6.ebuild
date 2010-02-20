@@ -15,7 +15,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="libmimic"
+IUSE="webcam"
 
 DEPEND=""
 RDEPEND="x11-libs/gtk+:2
@@ -25,19 +25,19 @@ RDEPEND="x11-libs/gtk+:2
 src_prepare() {
 	rm GPL PSF LGPL || die "rm license files failed"
 
-	if ! use libmimic; then
+	if ! use webcam; then
 		rm -r libmimic || die "rm libmimic dir failed"
 	fi
 }
 
 src_compile() {
-	if use libmimic ; then
+	if use webcam ; then
 		$(PYTHON -A) ./setup.py build_ext -i || die "libmimic compile failed"
 	fi
 }
 
 src_install() {
-	if use libmimic; then
+	if use webcam; then
 		rm -r build || die "rm build failed"
 	fi
 
