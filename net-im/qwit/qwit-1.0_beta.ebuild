@@ -4,11 +4,11 @@
 
 EAPI="2"
 
-inherit qt4
+inherit qt4-r2
 
 MY_P=${P/_/-}-src
 
-DESCRIPTION="Qt4 cross-platform client for Twitter."
+DESCRIPTION="Qt4 cross-platform client for Twitter"
 HOMEPAGE="http://code.google.com/p/qwit/"
 SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.bz2"
 
@@ -17,16 +17,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
+DOCS="AUTHORS"
+
 DEPEND="x11-libs/qt-gui:4"
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${MY_P}
-
-src_configure() {
-	eqmake4 ${PN}.pro
-}
-
-src_install(){
-	emake INSTALL_ROOT="${D}" install || die "emake install failed"
-	dodoc README || die "dodoc failed"
-}
