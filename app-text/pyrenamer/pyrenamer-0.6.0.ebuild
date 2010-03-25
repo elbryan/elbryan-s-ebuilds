@@ -14,18 +14,15 @@ SRC_URI="http://www.infinicode.org/code/${PN}/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
-IUSE=""
+KEYWORDS="~amd64 ~x86"
+IUSE="music"
 
 DEPEND=""
-RDEPEND="dev-python/pygtk:2"
+RDEPEND="dev-python/pygtk:2
+	music? ( || ( dev-python/eyeD3 app-misc/hachoir-metadata ) )"
 
 pkg_postinst() {
 	python_mod_optimize	$(python_get_sitedir)/${PN}
-
-	einfo
-	einfo "Notice that you'll need to emerge dev-python/eyeD3 or
-app-misc/hachoir-metadata in order to be able to rename music"
 }
 
 pkg_postrm() {
