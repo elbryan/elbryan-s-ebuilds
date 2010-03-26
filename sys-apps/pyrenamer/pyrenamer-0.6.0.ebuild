@@ -3,7 +3,6 @@
 # $Header: $
 
 EAPI="2"
-
 PYTHON_DEPEND="2"
 
 inherit python gnome2
@@ -22,7 +21,7 @@ RDEPEND="dev-python/pygtk:2
 	music? ( || ( dev-python/eyeD3 app-misc/hachoir-metadata ) )"
 
 pkg_postinst() {
-	python_mod_optimize	$(python_get_sitedir)/${PN}
+	python_mod_optimize $(python_get_sitedir)/${PN}
 }
 
 pkg_postrm() {
