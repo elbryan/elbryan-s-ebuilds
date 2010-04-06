@@ -16,7 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="music"
 
-DEPEND=""
 RDEPEND="dev-python/pygtk:2
 	music? ( || ( dev-python/eyeD3 app-misc/hachoir-metadata ) )"
 
