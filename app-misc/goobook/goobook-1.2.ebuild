@@ -4,8 +4,9 @@
 
 EAPI="2"
 PYTHON_DEPEND="2"
+RESTRICT_PYTHON_ABIS="3.*"
 
-inherit python distutils
+inherit distutils
 
 DESCRIPTION="Google Contacts wrapper for mutt"
 HOMEPAGE="http://code.google.com/p/goobook/"
