@@ -32,7 +32,7 @@ src_prepare() {
 
 src_compile() {
 	if use webcam ; then
-		$(PYTHON -A) ./setup.py build_ext -i || die "libmimic compile failed"
+		$(PYTHON) ./setup.py build_ext -i || die "libmimic compile failed"
 	fi
 }
 
